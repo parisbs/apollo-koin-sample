@@ -1,6 +1,7 @@
 package com.example.apollokoin
 
 import android.app.Application
+import com.example.apollokoin.data.dataModule
 import com.example.apollokoin.main.mainModule
 import com.example.apollokoin.post.postModule
 import com.example.apollokoin.utils.apolloKoinModule
@@ -24,6 +25,7 @@ class ApolloKoin : Application() {
             modules(
                 listOf(
                     apolloKoinModule,
+                    dataModule,
                     mainModule,
                     postModule
                 )
