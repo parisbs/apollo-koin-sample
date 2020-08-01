@@ -19,7 +19,7 @@ class ApolloApiGateway(
 ) : ApiGateway {
 
     override suspend fun allPost(first: Int, orderBy: PostOrderBy): ApiResponse<List<Post>> =
-        suspendCoroutine{ continuation ->
+        suspendCoroutine { continuation ->
             apolloClient.query(
                 AllPostsQuery(
                     first = first,
@@ -31,7 +31,7 @@ class ApolloApiGateway(
                         if (response.hasErrors()) {
                             continuation.resume(
                                 ApiResponse.Failure(
-                                    Exception(response.errors?.toString())
+                                    Exception(response.errors?.toString() ?: "Response with errors")
                                 )
                             )
                             return
@@ -40,24 +40,12 @@ class ApolloApiGateway(
                             posts.mapNotNull { it.toApiModel() }.apply {
                                 continuation.resume(ApiResponse.Success(this))
                             }
-                        } ?: continuation.resume(ApiResponse.Failure(Exception("Empty")))
+                        }
                     }
 
                     override fun onFailure(e: ApolloException) = continuation.resume(
                         ApiResponse.Failure(e)
                     )
                 })
-    }
-
-    override suspend fun getPost(
-        id: String,
-        commentsFirst: Int,
-        commentsOrderBy: CommentOrderBy
-    ): ApiResponse<Post> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun createComment(postId: String, text: String): ApiResponse<Comment> {
-        TODO("Not yet implemented")
     }
 }

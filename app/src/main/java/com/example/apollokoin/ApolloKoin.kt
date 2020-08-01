@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.apollokoin.data.dataModule
 import com.example.apollokoin.main.mainModule
 import com.example.apollokoin.post.postModule
+import com.example.apollokoin.usecases.useCasesModule
 import com.example.apollokoin.utils.apolloKoinModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
@@ -26,6 +27,7 @@ class ApolloKoin : Application() {
                 listOf(
                     apolloKoinModule,
                     dataModule,
+                    useCasesModule,
                     mainModule,
                     postModule
                 )

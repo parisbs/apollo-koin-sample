@@ -12,15 +12,4 @@ interface ApiGateway {
         first: Int,
         orderBy: PostOrderBy
     ): ApiResponse<List<Post>>
-
-    suspend fun getPost(
-        id: String,
-        commentsFirst: Int,
-        commentsOrderBy: CommentOrderBy
-    ):ApiResponse<Post>
-
-    suspend fun createComment(
-        postId: String,
-        text: String
-    ): ApiResponse<Comment>
 }
